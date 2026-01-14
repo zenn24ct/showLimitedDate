@@ -21,7 +21,8 @@
         }
 
         * {
-            box-sizing: border-box;
+            box-sizing: border-box; 
+            /* border-boxの意味は、要素の幅と高さにpaddingとborderを含めることです。 */
             margin: 0;
             padding: 0
         }
@@ -45,12 +46,13 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            margin-bottom: 12px
+            margin-bottom: 12px 
+            /*margin-bottomは下の要素との間隔を指定するプロパティです。*/
         }
 
         .year-title {
             font-weight: 700;
-            font-size: 20px
+            font-size: 50px
         }
 
         .year-controls {
@@ -91,11 +93,11 @@
 
         .progress-percent {
             font-weight: 800;
-            font-size: 18px
+            font-size: 20px
         }
 
         .bar-wrap {
-            height: 12px;
+            height: 20px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: 999px;
             overflow: hidden
@@ -123,7 +125,7 @@
 
         .day-cell {
             aspect-ratio: 1;
-            border-radius: 4px;
+            border-radius: 5px;
             background: rgba(255, 255, 255, 0.04);
             position: relative;
             cursor: default;
@@ -200,7 +202,7 @@
 <body>
     <div class="wrap">
         <div class="topbar">
-            <div class="year-title" id="yearTitle">Year — 2026</div>
+            <div class="year-title" id="yearTitle">2026年</div>
             <div class="year-controls">
                 <button class="btn" id="prevBtn" aria-label="前年">←</button>
                 <button class="btn" id="todayBtn" aria-label="今年">今年</button>
@@ -290,15 +292,15 @@
                     daysGrid.appendChild(cell);
                 }
             }
-
+            /* 年度切り替えボタンのイベントリスナー登録 */
             prevBtn.addEventListener('click', () => { currentYear--; render(currentYear); });
             nextBtn.addEventListener('click', () => { currentYear++; render(currentYear); });
             todayBtn.addEventListener('click', () => { currentYear = (new Date()).getFullYear(); render(currentYear); });
 
-            // initial
+            // 最初の描画
             render(currentYear);
 
-            // keep in sync with real time (in case day changes)
+            // ここで1分ごとに更新して、進捗が変わった場合に対応する
             setInterval(() => render(currentYear), 60 * 1000);
         })();
     </script>
